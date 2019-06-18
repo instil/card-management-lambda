@@ -1,0 +1,21 @@
+{
+  "name": "card-management-lambda",
+  "version": "1.0.0",
+  "description": "Simple card management AWS Lambdas",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instil/card-management-lambda.git"
+  },
+  "author": "Matthew Wilson",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/instil/card-management-lambda/issues"
+  },
+  "homepage": "https://github.com/instil/card-management-lambda",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}

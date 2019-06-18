@@ -1,0 +1,50 @@
+service: card-management-serverless-framework
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: eu-west-1 #Ireland
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+      Resource:
+        Fn::GetAtt:
+          - cardsTable
+          - Arn
+
+package:
+ include:
+   - ../src/**
+   - ../node_modules/**
+
+functions:
+  activate:
+    handler: src/activateCard.handler
+    events:
+      - http:
+          path: card/activate
+          method: post
+  block:
+    handler: src/blockCard.handler
+    events:
+      - http:
+          path: card/block
+          method: post
+
+resources:
+  Resources:
+    cardsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "cards"
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5

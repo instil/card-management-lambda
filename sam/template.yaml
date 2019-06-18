@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  ActivateCardFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: ActivateCard
+      CodeUri: ../
+      Handler: src/activateCard.handler
+      Runtime: nodejs8.10
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        HttpPost:
+          Type: Api
+          Properties:
+            Path: '/card/activate'
+            Method: post
+  BlockCardFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: BlockCard
+      CodeUri: ../
+      Handler: src/blockCard.handler
+      Runtime: nodejs8.10
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        HttpPost:
+          Type: Api
+          Properties:
+            Path: '/card/block'
+            Method: post
+  CardsDynamoDbTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: cards
+        AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
