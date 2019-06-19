@@ -64,3 +64,9 @@ typings/
 .serverless
 
 packaged.yaml
+
+# Terraform generated files
+*.tfstate
+*.tfstate.backup
+.terraform
+*.zip
