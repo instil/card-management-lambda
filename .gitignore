@@ -83,3 +83,5 @@ target
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+.DS_Store
