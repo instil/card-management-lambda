@@ -1,18 +1,22 @@
+# Card Management Lambda - CDK
 
-Welcome to your CDK Java project!
+This will create a cloud formation stack with:
 
-It is a Maven-based project, so you can open this directory with any Maven-compatible Java IDE,
-and you should be able to build and run tests from your IDE.
+- API Gateway with 2 POST Endpoints
+- Activate Card function
+- Block Card function
+- DynamoDB table named "cards-cdk"
 
-You should explore the contents of this template. It demonstrates a CDK app with two instances of
-a stack (`HelloStack`) which also uses a user-defined construct (`HelloConstruct`).
+## Setup
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app. This example relies on maven
+
+Welcome to your CDK Kotlin project!
+
+The `cdk.json` file tells the CDK Toolkit how to execute your app. This example relies on gradle
 to do that.
 
 # Useful commands
 
- * `mvn package`     compile and run tests
  * `cdk ls`          list all stacks in the app
  * `cdk synth`       emits the synthesized CloudFormation template
  * `cdk deploy`      deploy this stack to your default AWS account/region
@@ -20,3 +24,40 @@ to do that.
  * `cdk docs`        open CDK documentation
 
 Enjoy!
+
+## Deployment
+    cdk deploy card-management-cdk
+
+
+---------------
+
+## Endpoints
+
+### Activate Card Endpoint
+
+POST:
+
+    {
+    	"pan:": "1234123412341234",
+    	"expiryDate": "12/20"
+    }
+
+RESPONSE:
+
+    {
+      "id": "08996440-8d19-11e9-b5fc-070c28af1f8c",
+      "pan:": "1234",
+      "expiryDate": "12/20"
+    }
+
+### Block Card Endpoint
+
+POST:
+
+    {
+    	"id:": "08996440-8d19-11e9-b5fc-070c28af1f8c"
+    }
+
+RESPONSE:
+
+    {} //200 ok
