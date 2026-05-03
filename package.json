@@ -16,6 +16,6 @@
   },
   "homepage": "https://github.com/instil/card-management-lambda",
   "dependencies": {
-    "uuid": "^3.3.2"
+    "uuid": "^14.0.0"
   }
 }
